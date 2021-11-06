@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
+
+  const [value , setValue] = useState<number>(0)
+
+  const incHandler = () => {
+    setValue(value +1)
+  }
+
+  useEffect( () => {
+    let valueAsString = localStorage.getItem("CounterValue")
+    if (valueAsString) {
+      let newValue = JSON.parse(valueAsString);
+      setValue(newValue)
+    }
+  }, [] )
+
+  useEffect( () => {
+    localStorage.setItem("CounterValue", JSON.stringify(value))
+  }, [value])
+
+
+  // const clearFromLocalStorageHandler = () => {
+  //   localStorage.clear()
+  //   setValue(0)
+  // }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1> {value} </h1>
+        <button onClick={incHandler}> Inc </button>
+        {/*<button onClick={setFromLocalStorageHandler}> setFromLocalStorage </button>*/}
+        {/*<button onClick={getFromLocalStorageHandler}> getFromLocalStorage </button>*/}
+        {/*<button onClick={clearFromLocalStorageHandler}> clearFromLocalStorage </button>*/}
+
+
     </div>
   );
 }
