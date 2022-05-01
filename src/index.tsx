@@ -8,7 +8,7 @@ import App2 from './App2';
 ReactDOM.render(
     <React.StrictMode>
         {/*<App/>*/}
-        <hr/>
+
         <App2/>
 
     </React.StrictMode>,
